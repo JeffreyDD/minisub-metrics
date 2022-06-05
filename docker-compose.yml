@@ -1,0 +1,27 @@
+version: "2"
+
+volumes:
+  prom-data:
+  grafana-data:
+
+services:
+  metric-exporter:
+    image: jeffreydd/minisub-metric-exporter:latest
+    network_mode: host
+    restart: always
+
+  prom:
+    image: prom/prometheus
+    volumes:
+    - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    - prom-data:/prometheus/
+    ports:
+    - 9000:9090
+    restart: always
+
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+    - grafana-data:/var/lib/grafana
+    ports:
+    - 3000:3000
