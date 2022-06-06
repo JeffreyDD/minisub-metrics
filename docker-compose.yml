@@ -13,7 +13,7 @@ services:
   prom:
     image: prom/prometheus
     volumes:
-    - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
     - prom-data:/prometheus/
     ports:
     - 9000:9090
@@ -23,5 +23,7 @@ services:
     image: grafana/grafana-oss
     volumes:
     - grafana-data:/var/lib/grafana
+    - ./grafana/provisioning:/etc/grafana/provisioning
+    - ./grafana/dashboards:/var/lib/grafana/dashboards
     ports:
     - 3000:3000
