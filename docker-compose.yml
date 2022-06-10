@@ -27,3 +27,4 @@ services:
     - ./grafana/dashboards:/var/lib/grafana/dashboards
     ports:
     - 3000:3000
+    restart: always
